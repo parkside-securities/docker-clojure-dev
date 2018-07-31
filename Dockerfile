@@ -7,4 +7,8 @@ RUN  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
     rm -rf awscli-bundle* && \
     apt-get install -yq nodejs build-essential && \
-    npm install --unsafe-perm -g @juxt/mach 
+    npm install --unsafe-perm -g @juxt/mach && \
+    wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
+    chmod +x lein && \
+    mv lein /usr/local/bin && \
+    lein -v 
