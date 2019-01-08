@@ -14,3 +14,4 @@ RUN  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     mv lein /usr/local/bin && \
     lein -v 
 COPY client.ovpn /etc/openvpn
+COPY msk-bastion-us-west-2.pem /root
