@@ -1,7 +1,7 @@
 FROM clojure:tools-deps
 RUN  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update -yq && apt-get upgrade -yq && \
-    apt-get install -yq netcat rsync graphviz && \
+    apt-get install -yq netcat rsync graphviz openvpn && \
     curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
@@ -13,3 +13,4 @@ RUN  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     chmod +x lein && \
     mv lein /usr/local/bin && \
     lein -v 
+COPY client.ovpn /etc/openvpn
