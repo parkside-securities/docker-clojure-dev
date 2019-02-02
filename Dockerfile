@@ -21,5 +21,7 @@ ENV PATH /root/repos/git-subrepo/lib:${PATH}
 ENV MANPATH /root/repos/git-subrepo/man:$MANPATH
 COPY client.ovpn /etc/openvpn
 COPY entrypoint.sh /usr/local/bin
+COPY gitignore_global /root/gitignore_global
+COPY gitconfig /root/.gitconfig
 WORKDIR /parkside
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
