@@ -15,6 +15,8 @@ RUN  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     lein -v && \
     mkdir -p /root/repos && \
     git clone https://github.com/ingydotnet/git-subrepo /root/repos/git-subrepo && \
+    git clone https://github.com/awslabs/git-secrets.git /root/repos/git-secrets && \
+    cd /root/repos/git-secrets && make install && cd - && \
     apt-get clean
 ENV GIT_SUBREPO_ROOT /root/repos/git-subrepo
 ENV PATH /root/repos/git-subrepo/lib:${PATH}
