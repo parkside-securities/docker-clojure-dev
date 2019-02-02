@@ -27,5 +27,7 @@ COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
 COPY bashrc /root/.bashrc
 COPY zshrc /root/.zshrc
+COPY nvim-install.sh /tmp/
+RUN  sh /tmp/nvim-install.sh && rm /tmp/nvim-install.sh 
 WORKDIR /parkside
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
