@@ -1,7 +1,7 @@
 FROM quay.io/parkside-securities/docker-parkside-runtime:ubuntu
 RUN  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update -yq && apt-get upgrade -yq && \
-    apt-get install -yq git netcat rsync graphviz openvpn zsh direnv && \
+    apt-get install -yq git netcat rsync graphviz openvpn zsh direnv emacs && \
     curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
@@ -28,6 +28,6 @@ COPY gitconfig /root/.gitconfig
 COPY bashrc /root/.bashrc
 COPY zshrc /root/.zshrc
 COPY nvim-install.sh /tmp/
-RUN  sh /tmp/nvim-install.sh && rm /tmp/nvim-install.sh 
+RUN  sh /tmp/nvim-install.sh 
 WORKDIR /parkside
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

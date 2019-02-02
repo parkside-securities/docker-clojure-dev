@@ -5,11 +5,11 @@
 #See: https://github.com/neovim/neovim/wiki/Building-Neovim#quick-start
 
 #Save current dir
-pushd .
+#pushd .
 
 #Install dependencies
-sudo apt-get update
-sudo apt-get install -y \
+apt-get update
+apt-get install -y \
   autoconf \
   automake \
   cmake \
@@ -22,7 +22,8 @@ sudo apt-get install -y \
   pkg-config \
   python-pip \
   software-properties-common \
-  unzip
+  unzip \
+  gettext
 
 #Get or update neovim github repo
 mkdir -p ~/src
@@ -51,7 +52,7 @@ pip2 install --user --upgrade neovim
 # sudo gem install neovim
 
 #Restore dir
-popd
+#popd
 
-echo "nvim command: $(which nvim)"
-echo "nvim command: $(ls -al "$(which nvim)")"
+#echo "nvim command: $(which nvim)"
+#echo "nvim command: $(ls -al "$(which nvim)")"
