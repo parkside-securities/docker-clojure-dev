@@ -21,8 +21,11 @@ apt-get install -y \
   libunibilium0 \
   pkg-config \
   python-pip \
+  python3-pip \
   software-properties-common \
   unzip \
+  ruby \
+  rubygems \
   gettext
 
 #Get or update neovim github repo
@@ -47,9 +50,13 @@ make install
 
 # Enable use of python plugins
 pip2 install --user --upgrade neovim
+pip3 install pynvim 
+pip3 install neovim 
 
 # Enable use of ruby plugins
-# sudo gem install neovim
+gem install neovim
+
+npm install -g neovim
 
 #Restore dir
 #popd
