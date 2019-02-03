@@ -24,6 +24,9 @@ apt-get install -y \
   python3-pip \
   software-properties-common \
   unzip \
+  zlib1g-dev \
+  libffi-dev \
+  libssl-dev \
   ruby \
   rubygems \
   gettext
@@ -34,7 +37,6 @@ export PATH="/root/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 pyenv install 3.7.2
-pyenv install 2.7.15
 
 #Get or update neovim github repo
 mkdir -p ~/src

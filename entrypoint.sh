@@ -6,7 +6,6 @@ if [ -f /root/.ssh/id_rsa ] ; then
 fi
 
 if [ "${ENVKEY}x" == "x" ]; then
-    echo "No ENVKEY is provided."
     exec bash
 else
     eval $(envkey-source) && exec bash
