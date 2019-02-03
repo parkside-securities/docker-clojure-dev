@@ -15,6 +15,9 @@ RUN  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     lein -v && \
     mkdir -p /root/repos && \
     curl https://pyenv.run | bash && \
+    export PATH="/root/.pyenv/bin:$PATH" && \
+    eval "$(pyenv init -)" && \
+    eval "$(pyenv virtualenv-init -)" && \
     /root/.pyenv/bin/pyenv install 3.7.2 && \
     /root/.pyenv/bin/pyenv install 2.7.15 && \
     git clone https://github.com/ingydotnet/git-subrepo /root/repos/git-subrepo && \
