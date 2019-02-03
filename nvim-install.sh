@@ -37,6 +37,11 @@ export PATH="/root/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 pyenv install 3.7.2
+pyenv install 2.7.15
+pyenv virtualenv 3.7.2 neovim3
+pyenv virtualenv 2.7.15 neovim2
+pyenv local neovim3
+pip3 install pynvim neovim
 
 #Get or update neovim github repo
 mkdir -p ~/src
