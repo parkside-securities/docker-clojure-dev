@@ -2,7 +2,7 @@ FROM quay.io/parkside-securities/docker-parkside-runtime:ubuntu
 ENV GOROOT /usr/local/go
 ENV GOPATH /root/go
 ENV GIT_SUBREPO_ROOT /root/repos/git-subrepo
-ENV PATH /root/repos/git-subrepo/lib:/usr/local/go/bin:${PATH}
+ENV PATH /root/repos/git-subrepo/lib:/usr/local/go/bin:/root/go/bin:${PATH}
 ENV MANPATH /root/repos/git-subrepo/man:$MANPATH
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
