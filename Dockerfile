@@ -8,6 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     unzip awscli-bundle.zip && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
     rm -rf awscli-bundle* && \
+    go get -u -v github.com/kubernetes-sigs/aws-iam-authenticator/cmd/aws-iam-authenticator && \
     apt-get install -yq nodejs build-essential && \
     npm i npm@latest -g && \
     npm install --unsafe-perm -g @juxt/mach && \
