@@ -11,6 +11,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get install -yq git netcat rsync graphviz openvpn zsh direnv kubectl less && \
     curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     # The default emacs 24 is too old, so use 25
+    software-properties-common && \
     add-apt-repository ppa:kelleyk/emacs && \
     apt-get update && \
     apt-get install emacs25 && \
