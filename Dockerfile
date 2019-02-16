@@ -8,7 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
-    apt-get install -yq git netcat rsync graphviz openvpn zsh direnv emacs25 silversearcher-ag kubectl less && \
+    apt-get install -yq git netcat rsync graphviz zsh direnv emacs25 silversearcher-ag kubectl less && \
     curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
@@ -30,7 +30,6 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     git clone https://github.com/awslabs/git-secrets.git /root/repos/git-secrets && \
     cd /root/repos/git-secrets && make install && cd - && \
     apt-get clean
-COPY client.ovpn /etc/openvpn
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
