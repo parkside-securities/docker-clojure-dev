@@ -21,6 +21,10 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get install -yq nodejs build-essential && \
     npm i npm@latest -g && \
     npm install --unsafe-perm -g @juxt/mach && \
+    chmod +x kubectx && \
+    mv kubectx /usr/local/bin && \
+    chmod +x kubens && \
+    mv kubens /usr/local/bin && \
     wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
     mv lein /usr/local/bin && \
