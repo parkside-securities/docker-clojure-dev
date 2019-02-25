@@ -30,8 +30,6 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     git clone https://github.com/awslabs/git-secrets.git /root/repos/git-secrets && \
     cd /root/repos/git-secrets && make install && cd - && \
     apt-get clean
-COPY kubectx /usr/local/bin
-COPY kubens /usr/local/bin
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
