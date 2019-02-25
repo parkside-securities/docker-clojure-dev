@@ -10,3 +10,4 @@ if [ "${ENVKEY}x" == "x" ]; then
 else
     eval $(envkey-source) && exec bash
 fi
+
