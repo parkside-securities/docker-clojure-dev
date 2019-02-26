@@ -31,6 +31,11 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     git clone https://github.com/awslabs/git-secrets.git /root/repos/git-secrets && \
     git clone https://github.com/magicmonty/bash-git-prompt.git /root/.bash-git-prompt --depth=1 && \
     git clone https://github.com/olivierverdier/zsh-git-prompt.git /root/.zsh-git-prompt && \
+    git clone https://github.com/ahmetb/kubectx /root/repos/kubectx && \
+    chmod +x /root/repos/kubectx/kubectx && \
+    chmod +x /root/repos/kubectx/kubens && \
+    ln -s /root/repos/kubectx/kubectx /usr/local/bin/kubectx && \
+    ln -s /root/repos/kubectx/kubens /usr/local/bin/kubens && \
     cd /root/repos/git-secrets && make install && cd - && \
     curl https://pyenv.run | bash && \
     /root/.pyenv/bin/pyenv install 3.7.2 && \
