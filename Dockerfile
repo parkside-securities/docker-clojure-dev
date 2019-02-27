@@ -9,7 +9,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
     apt-get install -yq git netcat rsync graphviz zsh direnv emacs25 silversearcher-ag \ 
-                        kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox && \
+                        kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate && \
     curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
@@ -31,10 +31,16 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     git clone https://github.com/awslabs/git-secrets.git /root/repos/git-secrets && \
     git clone https://github.com/magicmonty/bash-git-prompt.git /root/.bash-git-prompt --depth=1 && \
     git clone https://github.com/olivierverdier/zsh-git-prompt.git /root/.zsh-git-prompt && \
+    git clone https://github.com/jonmosco/kube-ps1.git /root/.kube-ps1 && \
     cd /root/repos/git-secrets && make install && cd - && \
     curl https://pyenv.run | bash && \
     /root/.pyenv/bin/pyenv install 3.7.2 && \
     /root/.pyenv/bin/pyenv global 3.7.2 && \
+    curl -OL https://github.com/eraserhd/rep/releases/download/v0.1.2/rep-0.1.2-linux-amd64.tar.gz && \
+    tar zxvfp rep-0.1.2-linux-amd64.tar.gz && \
+    cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
+    cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
+    rm -rf rep-0.1.2-linux-amd64 && \
     apt-get clean
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
