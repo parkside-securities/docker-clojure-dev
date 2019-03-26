@@ -8,7 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
-    apt-get install -yq git netcat rsync graphviz zsh direnv emacs25 silversearcher-ag \ 
+    apt-get install -yq git netcat rsync graphviz zsh direnv emacs25 silversearcher-ag \
                         kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate && \
     curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
@@ -46,6 +46,8 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
     cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
     rm -rf rep-0.1.2-linux-amd64 && \
+    apt-get install libxss1 && \
+    npm install -g shadow-cljs && \
     apt-get clean
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
