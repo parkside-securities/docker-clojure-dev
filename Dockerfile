@@ -9,24 +9,24 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
     apt-get install -yq git netcat rsync graphviz zsh direnv emacs25 silversearcher-ag \
-                        kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate && \
-    curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
+                        kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 nodejs build-essential && \
+    apt-get clean
+RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
-    rm -rf awscli-bundle* && \
-    wget -q https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz && \
+    rm -rf awscli-bundle* 
+RUN wget -q https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz && \
     tar -xvf go1.11.5.linux-amd64.tar.gz && \
     mv go /usr/local && \
     /usr/local/go/bin/go get -u -v github.com/kubernetes-sigs/aws-iam-authenticator/cmd/aws-iam-authenticator && \
-    rm go1.11.5.linux-amd64.tar.gz && \
-    apt-get install -yq nodejs build-essential && \
-    npm i npm@latest -g && \
+    rm go1.11.5.linux-amd64.tar.gz
+RUN npm i npm@latest -g && \
     npm install --unsafe-perm -g @juxt/mach && \
     wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
     mv lein /usr/local/bin && \
-    lein -v && \
-    mkdir -p /root/repos && \
+    lein -v 
+RUN mkdir -p /root/repos && \
     git clone https://github.com/ingydotnet/git-subrepo /root/repos/git-subrepo && \
     git clone https://github.com/awslabs/git-secrets.git /root/repos/git-secrets && \
     git clone https://github.com/magicmonty/bash-git-prompt.git /root/.bash-git-prompt --depth=1 && \
@@ -46,11 +46,9 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
     cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
     rm -rf rep-0.1.2-linux-amd64 && \
-    apt-get install libxss1 && \
     npm install -g shadow-cljs && \
     pip install mkdocs && \
-    pip install plantuml-markdown && \
-    apt-get clean
+    pip install plantuml-markdown
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
