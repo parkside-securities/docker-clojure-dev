@@ -48,6 +48,8 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     rm -rf rep-0.1.2-linux-amd64 && \
     apt-get install libxss1 && \
     npm install -g shadow-cljs && \
+    pip install mkdocs && \
+    pip install plantuml-markdown && \
     apt-get clean
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
