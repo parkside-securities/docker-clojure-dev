@@ -16,11 +16,13 @@ RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bund
     unzip awscli-bundle.zip && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
     rm -rf awscli-bundle* 
-RUN wget -q https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz && \
-    tar -xvf go1.12.6.linux-amd64.tar.gz && \
+RUN wget -q https://dl.google.com/go/go1.11.11.linux-amd64.tar.gz && \
+    tar -xvf go1.11.11.linux-amd64.tar.gz && \
     mv go /usr/local && \
-    /usr/local/go/bin/go get -u -v github.com/kubernetes-sigs/aws-iam-authenticator/cmd/aws-iam-authenticator && \
-    rm go1.12.6.linux-amd64.tar.gz
+    rm go1.11.11.linux-amd64.tar.gz
+RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator && \
+    chmod +x ./aws-iam-authenticator && \
+    mv ./aws-iam-authenticator /usr/local/bin/
 RUN npm i npm@latest -g && \
     npm install --unsafe-perm -g @juxt/mach && \
     wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
