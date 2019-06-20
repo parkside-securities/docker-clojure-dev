@@ -1,4 +1,3 @@
-eval "$(direnv hook bash)"
 export PATH="/root/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -22,7 +21,4 @@ if [ -f /root/.bashrc_pksd ]; then
     source /root/.bashrc_pksd
 fi
 
-export PATH="/root/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
+eval "$(direnv hook bash)"
