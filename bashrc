@@ -1,4 +1,3 @@
-eval "$(direnv hook bash)"
 export PATH="/root/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -26,3 +25,4 @@ export PATH="/root/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+eval "$(direnv hook bash)"
