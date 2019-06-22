@@ -49,9 +49,10 @@ RUN mkdir -p /root/repos && \
     cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
     cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
     rm -rf rep-0.1.2-linux-amd64 && \
-    npm install -g shadow-cljs && \
-    pip install mkdocs && \
-    pip install plantuml-markdown
+    npm install -g shadow-cljs 
+RUN pip install mkdocs && \
+    pip install plantuml-markdown && \
+    pip install markdown-include
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
