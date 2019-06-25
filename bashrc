@@ -22,3 +22,6 @@ if [ -f /root/.bashrc_pksd ]; then
 fi
 
 eval "$(direnv hook bash)"
+
+alias clj="clj -Sforce"
+alias clojure="clojure -Sforce"
