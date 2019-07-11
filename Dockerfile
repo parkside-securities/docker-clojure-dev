@@ -52,7 +52,8 @@ RUN mkdir -p /root/repos && \
     npm install -g shadow-cljs 
 RUN pip install mkdocs && \
     pip install plantuml-markdown && \
-    pip install markdown-include
+    pip install markdown-include && \
+    pip install mkdocs-rtd-dropdown
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
