@@ -23,9 +23,20 @@ RUN wget -q https://dl.google.com/go/go1.11.11.linux-amd64.tar.gz && \
 RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator && \
     chmod +x ./aws-iam-authenticator && \
     mv ./aws-iam-authenticator /usr/local/bin/
-RUN npm i npm@latest -g && \
-    npm install --unsafe-perm -g @juxt/mach && \
-    wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
+
+ENV NVM_DIR /usr/local/nvm
+RUN mkdir -p $NVM_DIR && \
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+ENV NODE_VERSION v9.11.2
+RUN /bin/bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
+ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+RUN . $NVM_DIR/nvm.sh && \
+    nvm use default && \
+    npm i npm@latest -g && \
+    npm install -g closh --unsafe-perm && \
+    npm install --unsafe-perm -g @juxt/mach
+RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
     mv lein /usr/local/bin && \
     lein -v 
@@ -54,6 +65,8 @@ RUN pip install mkdocs && \
     pip install plantuml-markdown && \
     pip install markdown-include && \
     pip install mkdocs-rtd-dropdown
+RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
+    install -t /usr/local/bin drone
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
