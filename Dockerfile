@@ -56,6 +56,8 @@ RUN pip install mkdocs && \
     pip install mkdocs-rtd-dropdown
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
     install -t /usr/local/bin drone
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+RUN npm install -g closh --unsafe-perm
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
