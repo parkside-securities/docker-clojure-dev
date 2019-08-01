@@ -23,15 +23,20 @@ RUN wget -q https://dl.google.com/go/go1.11.11.linux-amd64.tar.gz && \
 RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator && \
     chmod +x ./aws-iam-authenticator && \
     mv ./aws-iam-authenticator /usr/local/bin/
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash && \
-    . $HOME/.nvm/nvm.sh && \
-    nvm install 9 && \
-    nvm use 9 && \
-    nvm alias default 9 && \
+
+ENV NVM_DIR /usr/local/nvm
+RUN mkdir -p $NVM_DIR && \
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+ENV NODE_VERSION v9.11.2
+RUN /bin/bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
+ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+RUN . $NVM_DIR/nvm.sh && \
+    nvm use default && \
     npm i npm@latest -g && \
     npm install -g closh --unsafe-perm && \
-    npm install --unsafe-perm -g @juxt/mach && \
-    wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
+    npm install --unsafe-perm -g @juxt/mach
+RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
     mv lein /usr/local/bin && \
     lein -v 
