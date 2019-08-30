@@ -67,6 +67,7 @@ RUN pip install mkdocs && \
     pip install mkdocs-rtd-dropdown
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
     install -t /usr/local/bin drone
+COPY settings.xml /root/.m2/settings.xml
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
