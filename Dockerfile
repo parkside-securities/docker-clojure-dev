@@ -23,6 +23,7 @@ RUN wget -q https://dl.google.com/go/go1.11.11.linux-amd64.tar.gz && \
 RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator && \
     chmod +x ./aws-iam-authenticator && \
     mv ./aws-iam-authenticator /usr/local/bin/
+RUN curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir -p $NVM_DIR && \
