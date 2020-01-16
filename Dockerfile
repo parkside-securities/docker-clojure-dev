@@ -10,7 +10,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update -yq && apt-get upgrade -yq && \
     apt-get install -yq git netcat rsync graphviz zsh direnv emacs25 silversearcher-ag \
                         kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 nodejs build-essential \
-                        plantuml && \
+                        plantuml rlwrap && \
     apt-get clean
 RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
