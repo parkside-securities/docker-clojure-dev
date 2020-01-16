@@ -10,7 +10,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update -yq && apt-get upgrade -yq && \
     apt-get install -yq git netcat rsync graphviz zsh direnv emacs25 silversearcher-ag \
                         kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 nodejs build-essential \
-                        plantuml && \
+                        plantuml rlwrap && \
     apt-get clean
 RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
@@ -72,7 +72,6 @@ RUN pip install mkdocs && \
     pip install mkdocs-rtd-dropdown
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
     install -t /usr/local/bin drone
-COPY settings.xml /root/.m2/settings.xml
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
