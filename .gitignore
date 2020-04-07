@@ -137,3 +137,5 @@ tags
 
 
 # End of https://www.gitignore.io/api/vim,macos,linux,emacs,clojure,leiningen
+
+.mach/
