@@ -8,7 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
-    apt-get install -yq git netcat rsync zsh direnv emacs25 silversearcher-ag \
+    apt-get install -yq git netcat rsync zsh graphviz direnv emacs25 silversearcher-ag \
                         kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 nodejs build-essential \
                         plantuml rlwrap && \
     apt-get clean
