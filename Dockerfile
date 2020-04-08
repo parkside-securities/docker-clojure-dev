@@ -8,7 +8,8 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
-    apt-get install -yq git netcat rsync graphviz zsh direnv emacs25 silversearcher-ag \
+    apt-get install -yq git netcat rsync zsh libgd-dev fontconfig libcairo2-dev libpango1.0-dev libgts-dev graphviz \ 
+                        direnv emacs25 silversearcher-ag \
                         kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 nodejs build-essential \
                         plantuml rlwrap && \
     apt-get clean
@@ -28,6 +29,11 @@ RUN curl -s -LO https://github.com/kubernetes-sigs/kustomize/releases/download/k
     mv kustomize /usr/local/bin/kustomize && \
     rm kustomize_v3.3.0_linux_amd64.tar.gz && \
     chmod a+x /usr/local/bin/kustomize
+RUN curl -sL https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar.gz -O && \
+    tar xvfp graphviz.tar.gz && \
+    cd  graphviz-* && \
+    ./configure && make && make install && \
+    cd - && rm -rf graphviz*
 
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir -p $NVM_DIR && \
