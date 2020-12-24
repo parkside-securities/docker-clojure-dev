@@ -9,10 +9,11 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
     apt-get install -yq git netcat rsync zsh libgd-dev fontconfig libcairo2-dev libpango1.0-dev libgts-dev graphviz \ 
-                        direnv emacs25 silversearcher-ag \
+                        emacs25 silversearcher-ag \
                         kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 nodejs build-essential \
-                        plantuml rlwrap && \
+                        plantuml rlwrap jq && \
     apt-get clean
+RUN curl -sfL https://direnv.net/install.sh | bash
 RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
