@@ -46,6 +46,7 @@ ENV PATH      $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 RUN . $NVM_DIR/nvm.sh && \
     nvm use default && \
     npm i npm@latest -g && \
+    npm install agentkeepalive && \
     npm install -g shadow-cljs
 RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
@@ -76,7 +77,7 @@ RUN pip install mkdocs && \
     pip install markdown-include && \
     pip install mkdocs-rtd-dropdown
 RUN python3 -m venv dbt-env && \
-    source dbt-env/bin/activate && \
+    . dbt-env/bin/activate && \
     pip install dbt
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
     install -t /usr/local/bin drone
