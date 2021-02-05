@@ -36,6 +36,17 @@ RUN curl -sL https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar
     ./configure && make && make install && \
     cd - && rm -rf graphviz*
 
+ENV NVM_DIR /usr/local/nvm
+RUN mkdir -p $NVM_DIR && \
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+ENV NODE_VERSION v15.8.0
+RUN /bin/bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
+ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+RUN . $NVM_DIR/nvm.sh && \
+    nvm use default && \
+    npm i npm@latest -g && \
+    npm install -g shadow-cljs
 RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
     mv lein /usr/local/bin && \
@@ -59,8 +70,7 @@ RUN mkdir -p /root/repos && \
     tar zxvfp rep-0.1.2-linux-amd64.tar.gz && \
     cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
     cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
-    rm -rf rep-0.1.2-linux-amd64 && \
-    npm install -g shadow-cljs 
+    rm -rf rep-0.1.2-linux-amd64
 RUN pip install mkdocs && \
     pip install plantuml-markdown && \
     pip install markdown-include && \
