@@ -45,9 +45,7 @@ ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 RUN . $NVM_DIR/nvm.sh && \
     nvm use default && \
-    npm i npm@latest -g && \
-    npm install agentkeepalive && \
-    npm install -g shadow-cljs
+    npm i npm@latest -g
 RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
     mv lein /usr/local/bin && \
