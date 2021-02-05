@@ -76,8 +76,8 @@ RUN pip install mkdocs && \
     pip install plantuml-markdown && \
     pip install markdown-include && \
     pip install mkdocs-rtd-dropdown
-RUN python3 -m venv dbt-env && \
-    . dbt-env/bin/activate && \
+RUN python3 -m venv /usr/local/dbt-env && \
+    . /usr/local/dbt-env/bin/activate && \
     pip install dbt
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
     install -t /usr/local/bin drone
