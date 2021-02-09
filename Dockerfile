@@ -8,10 +8,11 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
-    apt-get install -yq git netcat rsync zsh libgd-dev fontconfig libcairo2-dev libpango1.0-dev libgts-dev graphviz \ 
-                        emacs25 silversearcher-ag \
-                        kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 nodejs build-essential \
-                        plantuml rlwrap jq && \
+    apt-get install -yq git netcat rsync zsh libgd-dev fontconfig \
+    libcairo2-dev libpango1.0-dev libgts-dev graphviz \
+    emacs25 silversearcher-ag \
+    kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 \
+    nodejs build-essential plantuml rlwrap jq python3-venv && \
     apt-get clean
 RUN curl -sfL https://direnv.net/install.sh | bash
 RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
@@ -45,7 +46,6 @@ ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 RUN . $NVM_DIR/nvm.sh && \
     nvm use default && \
-    npm i npm@latest -g && \
     npm install -g closh --unsafe-perm
 RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
@@ -76,6 +76,9 @@ RUN pip install mkdocs && \
     pip install plantuml-markdown && \
     pip install markdown-include && \
     pip install mkdocs-rtd-dropdown
+RUN python3 -m venv /usr/local/dbt-env && \
+    . /usr/local/dbt-env/bin/activate && \
+    pip install dbt
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
     install -t /usr/local/bin drone
 COPY entrypoint.sh /usr/local/bin
