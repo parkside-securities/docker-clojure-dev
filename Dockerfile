@@ -18,7 +18,7 @@ RUN curl -sfL https://direnv.net/install.sh | bash
 RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
     unzip awscli-bundle.zip && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
-    rm -rf awscli-bundle* 
+    rm -rf awscli-bundle*
 RUN wget -q https://dl.google.com/go/go1.11.11.linux-amd64.tar.gz && \
     tar -xvf go1.11.11.linux-amd64.tar.gz && \
     mv go /usr/local && \
@@ -37,6 +37,17 @@ RUN curl -sL https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar
     ./configure && make && make install && \
     cd - && rm -rf graphviz*
 
+ENV REDIS_VERSION=6.2.1
+RUN curl -OL https://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz && \
+tar xzf redis-${REDIS_VERSION}.tar.gz && \
+cd redis-${REDIS_VERSION} && \
+make && \
+cp ./src/redis-server /usr/local/bin/ && \
+cp ./src/redis-benchmark /usr/local/bin/ && \
+cp ./src/redis-sentinel /usr/local/bin/ && \
+cp ./src/redis-cli /usr/local/bin/ && \
+rm -rf /tmp/redis-${REDIS_VERSION}
+
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir -p $NVM_DIR && \
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
@@ -50,7 +61,7 @@ RUN . $NVM_DIR/nvm.sh && \
 RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
     mv lein /usr/local/bin && \
-    lein -v 
+    lein -v
 RUN mkdir -p /root/repos && \
     git clone https://github.com/ingydotnet/git-subrepo /root/repos/git-subrepo && \
     git clone https://github.com/awslabs/git-secrets.git /root/repos/git-secrets && \
@@ -71,7 +82,7 @@ RUN mkdir -p /root/repos && \
     cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
     cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
     rm -rf rep-0.1.2-linux-amd64 && \
-    npm install -g shadow-cljs 
+    npm install -g shadow-cljs
 RUN pip install mkdocs && \
     pip install plantuml-markdown && \
     pip install markdown-include && \
