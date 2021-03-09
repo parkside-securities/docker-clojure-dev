@@ -46,6 +46,7 @@ RUN curl -OL https://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz &&
     cp ./src/redis-benchmark /usr/local/bin/ && \
     cp ./src/redis-sentinel /usr/local/bin/ && \
     cp ./src/redis-cli /usr/local/bin/ && \
+    chmod +x /usr/local/bin/redis-* && \
     rm -rf /tmp/redis-${REDIS_VERSION}
 
 ENV NVM_DIR /usr/local/nvm
