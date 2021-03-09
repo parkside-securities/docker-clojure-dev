@@ -41,7 +41,7 @@ ENV REDIS_VERSION=6.2.1
 RUN curl -OL https://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz && \
     tar xzf redis-${REDIS_VERSION}.tar.gz && \
     cd redis-${REDIS_VERSION} && \
-    make && \
+    make install && \
     cp ./src/redis-server /usr/local/bin/ && \
     cp ./src/redis-benchmark /usr/local/bin/ && \
     cp ./src/redis-sentinel /usr/local/bin/ && \
