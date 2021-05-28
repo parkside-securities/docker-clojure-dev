@@ -1,4 +1,4 @@
-FROM quay.io/parkside-securities/docker-parkside-runtime:try-corretto-32
+FROM quay.io/parkside-securities/docker-parkside-runtime:master-41
 ENV GOROOT /usr/local/go
 ENV GOPATH /root/go
 ENV GIT_SUBREPO_ROOT /root/repos/git-subrepo
