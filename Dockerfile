@@ -66,7 +66,7 @@ RUN mkdir -p /root/repos && \
     ln -s /root/repos/kubectx/kubectx /usr/local/bin/kubectx && \
     ln -s /root/repos/kubectx/kubens /usr/local/bin/kubens && \
     cd /root/repos/git-secrets && make install && cd - && \
-    curl https://pyenv.run | bash && \
+    curl -OL https://github.com/eraserhd/rep/releases/download/v0.1.2/rep-0.1.2-linux-amd64.tar.gz && \
     tar zxvfp rep-0.1.2-linux-amd64.tar.gz && \
     cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
     cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
