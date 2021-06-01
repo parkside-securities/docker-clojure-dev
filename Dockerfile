@@ -1,4 +1,6 @@
-FROM quay.io/parkside-securities/docker-parkside-runtime:master-48
+ARG REGISTRY=quay.io/parkside-securities
+FROM $REGISTRY/docker-parkside-runtime:master-48
+
 ENV GOROOT /usr/local/go
 ENV GOPATH /root/go
 ENV GIT_SUBREPO_ROOT /root/repos/git-subrepo
