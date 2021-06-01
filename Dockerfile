@@ -1,54 +1,54 @@
 ARG REGISTRY=quay.io/parkside-securities
 FROM $REGISTRY/docker-parkside-runtime:master-55
 
-# ENV GOROOT /usr/local/go
-# ENV GOPATH /root/go
-# ENV GIT_SUBREPO_ROOT /root/repos/git-subrepo
-# ENV PATH /root/repos/git-subrepo/lib:/usr/local/go/bin:/root/go/bin:${PATH}
-# ENV MANPATH /root/repos/git-subrepo/man:$MANPATH
-# RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-#     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
-#     apt-get update -yq && apt-get upgrade -yq && \
-#     apt-get install -yq git netcat rsync zsh libgd-dev fontconfig \
-#     libcairo2-dev libpango1.0-dev libgts-dev graphviz \
-#     emacs silversearcher-ag \
-#     kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 \
-#     build-essential plantuml jq && \
-#     apt-get clean
-# RUN curl -sfL https://direnv.net/install.sh | bash
-# RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
-#     unzip awscli-bundle.zip && \
-#     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
-#     rm -rf awscli-bundle*
-# RUN wget -q https://dl.google.com/go/go1.11.11.linux-amd64.tar.gz && \
-#     tar -xvf go1.11.11.linux-amd64.tar.gz && \
-#     mv go /usr/local && \
-#     rm go1.11.11.linux-amd64.tar.gz
-# RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator && \
-#     chmod +x ./aws-iam-authenticator && \
-#     mv ./aws-iam-authenticator /usr/local/bin/
-# RUN curl -s -LO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv3.3.0/kustomize_v3.3.0_linux_amd64.tar.gz && \
-#     tar xzf kustomize_v3.3.0_linux_amd64.tar.gz && \
-#     mv kustomize /usr/local/bin/kustomize && \
-#     rm kustomize_v3.3.0_linux_amd64.tar.gz && \
-#     chmod a+x /usr/local/bin/kustomize
-# RUN curl -sL https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar.gz -O && \
-#     tar xvfp graphviz.tar.gz && \
-#     cd  graphviz-* && \
-#     ./configure && make && make install && \
-#     cd - && rm -rf graphviz*
+ENV GOROOT /usr/local/go
+ENV GOPATH /root/go
+ENV GIT_SUBREPO_ROOT /root/repos/git-subrepo
+ENV PATH /root/repos/git-subrepo/lib:/usr/local/go/bin:/root/go/bin:${PATH}
+ENV MANPATH /root/repos/git-subrepo/man:$MANPATH
+RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
+    apt-get update -yq && apt-get upgrade -yq && \
+    apt-get install -yq git netcat rsync zsh libgd-dev fontconfig \
+    libcairo2-dev libpango1.0-dev libgts-dev graphviz \
+    emacs silversearcher-ag \
+    kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 \
+    build-essential plantuml jq && \
+    apt-get clean
+RUN curl -sfL https://direnv.net/install.sh | bash
+RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
+    unzip awscli-bundle.zip && \
+    ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
+    rm -rf awscli-bundle*
+RUN wget -q https://dl.google.com/go/go1.11.11.linux-amd64.tar.gz && \
+    tar -xvf go1.11.11.linux-amd64.tar.gz && \
+    mv go /usr/local && \
+    rm go1.11.11.linux-amd64.tar.gz
+RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator && \
+    chmod +x ./aws-iam-authenticator && \
+    mv ./aws-iam-authenticator /usr/local/bin/
+RUN curl -s -LO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv3.3.0/kustomize_v3.3.0_linux_amd64.tar.gz && \
+    tar xzf kustomize_v3.3.0_linux_amd64.tar.gz && \
+    mv kustomize /usr/local/bin/kustomize && \
+    rm kustomize_v3.3.0_linux_amd64.tar.gz && \
+    chmod a+x /usr/local/bin/kustomize
+RUN curl -sL https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar.gz -O && \
+    tar xvfp graphviz.tar.gz && \
+    cd  graphviz-* && \
+    ./configure && make && make install && \
+    cd - && rm -rf graphviz*
 
-# ENV REDIS_VERSION=6.2.1
-# RUN curl -OL https://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz && \
-#     tar xzf redis-${REDIS_VERSION}.tar.gz && \
-#     cd redis-${REDIS_VERSION} && \
-#     make install && \
-#     cp ./src/redis-server /usr/local/bin/ && \
-#     cp ./src/redis-benchmark /usr/local/bin/ && \
-#     cp ./src/redis-sentinel /usr/local/bin/ && \
-#     cp ./src/redis-cli /usr/local/bin/ && \
-#     chmod +x /usr/local/bin/redis-* && \
-#     rm -rf /tmp/redis-${REDIS_VERSION}
+ENV REDIS_VERSION=6.2.1
+RUN curl -OL https://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz && \
+    tar xzf redis-${REDIS_VERSION}.tar.gz && \
+    cd redis-${REDIS_VERSION} && \
+    make install && \
+    cp ./src/redis-server /usr/local/bin/ && \
+    cp ./src/redis-benchmark /usr/local/bin/ && \
+    cp ./src/redis-sentinel /usr/local/bin/ && \
+    cp ./src/redis-cli /usr/local/bin/ && \
+    chmod +x /usr/local/bin/redis-* && \
+    rm -rf /tmp/redis-${REDIS_VERSION}
 
 # RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
 #     chmod +x lein && \
