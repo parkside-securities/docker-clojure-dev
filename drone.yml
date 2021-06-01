@@ -19,7 +19,7 @@ docker-resources: &docker-resources
 
 steps:
 - name: create-docker-tags
-  image: 642622649254.dkr.ecr.us-west-2.amazonaws.com/clojure-dev:master
+  image: busybox:1.28
   pull: if-not-exists
   commands:
   - echo -n "${DRONE_COMMIT_BRANCH}-${DRONE_BUILD_NUMBER}" > .tags
