@@ -72,15 +72,15 @@ RUN mkdir -p /root/repos && \
     cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
     rm -rf rep-0.1.2-linux-amd64 && \
     npm install -g shadow-cljs
-# RUN pip install mkdocs && \
-#     pip install plantuml-markdown && \
-#     pip install markdown-include && \
-#     pip install mkdocs-rtd-dropdown
-# RUN python -m venv /usr/local/dbt-env && \
-#     . /usr/local/dbt-env/bin/activate && \
-#     python -m pip install -U pip && \
-#     pip install wheel && \
-#     pip install dbt
+RUN pip install mkdocs && \
+    pip install plantuml-markdown && \
+    pip install markdown-include && \
+    pip install mkdocs-rtd-dropdown
+RUN python -m venv /usr/local/dbt-env && \
+    . /usr/local/dbt-env/bin/activate && \
+    python -m pip install -U pip && \
+    pip install wheel && \
+    pip install dbt
 # RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
 #     install -t /usr/local/bin drone
 # COPY entrypoint.sh /usr/local/bin
