@@ -1,5 +1,5 @@
 ARG REGISTRY=quay.io/parkside-securities
-FROM $REGISTRY/docker-parkside-runtime:fix-repository-54
+FROM $REGISTRY/docker-parkside-runtime:master-10
 
 ENV GOROOT /usr/local/go
 ENV GOPATH /root/go
