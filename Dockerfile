@@ -50,28 +50,28 @@ RUN curl -OL https://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz &&
     chmod +x /usr/local/bin/redis-* && \
     rm -rf /tmp/redis-${REDIS_VERSION}
 
-# RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
-#     chmod +x lein && \
-#     mv lein /usr/local/bin && \
-#     lein -v
-# RUN mkdir -p /root/repos && \
-#     git clone https://github.com/ingydotnet/git-subrepo /root/repos/git-subrepo && \
-#     git clone https://github.com/awslabs/git-secrets.git /root/repos/git-secrets && \
-#     git clone https://github.com/magicmonty/bash-git-prompt.git /root/.bash-git-prompt --depth=1 && \
-#     git clone https://github.com/olivierverdier/zsh-git-prompt.git /root/.zsh-git-prompt && \
-#     git clone https://github.com/jonmosco/kube-ps1.git /root/.kube-ps1 && \
-#     git clone https://github.com/ahmetb/kubectx /root/repos/kubectx && \
-#     chmod +x /root/repos/kubectx/kubectx && \
-#     chmod +x /root/repos/kubectx/kubens && \
-#     ln -s /root/repos/kubectx/kubectx /usr/local/bin/kubectx && \
-#     ln -s /root/repos/kubectx/kubens /usr/local/bin/kubens && \
-#     cd /root/repos/git-secrets && make install && cd - && \
-#     curl -OL https://github.com/eraserhd/rep/releases/download/v0.1.2/rep-0.1.2-linux-amd64.tar.gz && \
-#     tar zxvfp rep-0.1.2-linux-amd64.tar.gz && \
-#     cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
-#     cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
-#     rm -rf rep-0.1.2-linux-amd64 && \
-#     npm install -g shadow-cljs
+RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
+    chmod +x lein && \
+    mv lein /usr/local/bin && \
+    lein -v
+RUN mkdir -p /root/repos && \
+    git clone https://github.com/ingydotnet/git-subrepo /root/repos/git-subrepo && \
+    git clone https://github.com/awslabs/git-secrets.git /root/repos/git-secrets && \
+    git clone https://github.com/magicmonty/bash-git-prompt.git /root/.bash-git-prompt --depth=1 && \
+    git clone https://github.com/olivierverdier/zsh-git-prompt.git /root/.zsh-git-prompt && \
+    git clone https://github.com/jonmosco/kube-ps1.git /root/.kube-ps1 && \
+    git clone https://github.com/ahmetb/kubectx /root/repos/kubectx && \
+    chmod +x /root/repos/kubectx/kubectx && \
+    chmod +x /root/repos/kubectx/kubens && \
+    ln -s /root/repos/kubectx/kubectx /usr/local/bin/kubectx && \
+    ln -s /root/repos/kubectx/kubens /usr/local/bin/kubens && \
+    cd /root/repos/git-secrets && make install && cd - && \
+    curl -OL https://github.com/eraserhd/rep/releases/download/v0.1.2/rep-0.1.2-linux-amd64.tar.gz && \
+    tar zxvfp rep-0.1.2-linux-amd64.tar.gz && \
+    cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
+    cp rep-0.1.2-linux-amd64/rep.1 /usr/local/man/rep.1 && \
+    rm -rf rep-0.1.2-linux-amd64 && \
+    npm install -g shadow-cljs
 # RUN pip install mkdocs && \
 #     pip install plantuml-markdown && \
 #     pip install markdown-include && \
