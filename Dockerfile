@@ -88,5 +88,5 @@ COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
 COPY bashrc /root/.bashrc
 COPY zshrc /root/.zshrc
-WORKDIR /parkside
-# ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+# WORKDIR /parkside
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
