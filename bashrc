@@ -1,6 +1,3 @@
-export PATH="/root/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 source /root/.kube-ps1/kube-ps1.sh
 GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_START='[$(kube_ps1)]'
