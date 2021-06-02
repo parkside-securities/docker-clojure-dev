@@ -32,6 +32,11 @@ RUN curl -s -LO https://github.com/kubernetes-sigs/kustomize/releases/download/k
     mv kustomize /usr/local/bin/kustomize && \
     rm kustomize_v3.3.0_linux_amd64.tar.gz && \
     chmod a+x /usr/local/bin/kustomize
+RUN curl -sL https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar.gz -O && \
+    tar xvfp graphviz.tar.gz && \
+    cd  graphviz-* && \
+    ./configure && make && make install && \
+    cd - && rm -rf graphviz*
 
 ENV REDIS_VERSION=6.2.1
 RUN curl -OL https://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz && \
@@ -77,7 +82,7 @@ RUN python -m venv /usr/local/dbt-env && \
     pip install wheel && \
     pip install dbt
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.2.0/drone_linux_amd64.tar.gz | tar zx && \
-    install -t /usr/local/bin drone
+    mv drone /usr/local/bin/
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
