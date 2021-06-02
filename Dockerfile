@@ -86,7 +86,7 @@ RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_li
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
-# COPY bashrc /root/.bashrc
-# COPY zshrc /root/.zshrc
+COPY bashrc /root/.bashrc
+COPY zshrc /root/.zshrc
 WORKDIR /parkside
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+# ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
