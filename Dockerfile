@@ -81,12 +81,12 @@ RUN python -m venv /usr/local/dbt-env && \
     python -m pip install -U pip && \
     pip install wheel && \
     pip install dbt
-RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
-    install -t /usr/local/bin drone
+# RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
+    # install -t /usr/local/bin drone
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
 COPY bashrc /root/.bashrc
 COPY zshrc /root/.zshrc
-# WORKDIR /parkside
+WORKDIR /parkside
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
