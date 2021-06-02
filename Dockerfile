@@ -13,7 +13,7 @@ RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
     libcairo2-dev libpango1.0-dev libgts-dev graphviz \
     emacs silversearcher-ag \
     kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 \
-    build-essential plantuml jq && \
+    build-essential plantuml jq iproute2 && \
     apt-get clean
 RUN curl -sfL https://direnv.net/install.sh | bash
 RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
