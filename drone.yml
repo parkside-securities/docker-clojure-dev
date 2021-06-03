@@ -1,0 +1,81 @@
+kind: pipeline
+name: docker-build
+
+shell-resources: &shell-resources
+  limits:
+    cpu: 2
+    memory: 2000MiB
+  requests:
+    cpu: 0.1
+    memory: 125MiB
+
+docker-resources: &docker-resources
+  limits:
+    cpu: 4
+    memory: 2000MiB
+  requests:
+    cpu: 0.1
+    memory: 750MiB
+
+steps:
+- name: create-docker-tags
+  image: busybox:1.28
+  pull: if-not-exists
+  commands:
+  - echo -n "${DRONE_COMMIT_BRANCH}-${DRONE_BUILD_NUMBER}" > .tags
+  resources:
+    <<: *shell-resources
+
+- name: docker-build
+  image: plugins/docker
+  pull: if-not-exists
+  depends_on: [ create-docker-tags ]
+  resources:
+    <<: *docker-resources
+  environment:
+    DOCKER_BUILDKIT: 1
+    AWS_ACCESS_KEY_ID:
+      from_secret: aws_access_key_id
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: aws_secret_access_key
+  settings:
+    registry: quay.io
+    username:
+      from_secret: quay_username
+    password:
+      from_secret: quay_password
+    repo: quay.io/parkside-securities/clojure-dev
+    build_args_from_env:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - DRONE_COMMIT_SHA
+
+- name: docker-build-ecr
+  image: plugins/ecr
+  pull: if-not-exists
+  depends_on: [ create-docker-tags ]
+  resources:
+    <<: *docker-resources
+  environment:
+    DOCKER_BUILDKIT: 1
+    AWS_ACCESS_KEY_ID:
+      from_secret: aws_access_key_id
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: aws_secret_access_key
+  settings:
+    registry: 642622649254.dkr.ecr.us-west-2.amazonaws.com
+    region: us-west-2
+    access_key: 
+      from_secret: aws_access_key_id
+    secret_key:
+      from_secret: aws_secret_access_key
+    repo: clojure-dev
+    build_args_from_env:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - DRONE_COMMIT_SHA
+    build_args:
+      - REGISTRY=642622649254.dkr.ecr.us-west-2.amazonaws.com
+
+image_pull_secrets:
+- dockerconfigjson

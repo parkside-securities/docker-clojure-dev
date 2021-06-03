@@ -1,18 +1,19 @@
-FROM quay.io/parkside-securities/docker-parkside-runtime:ubuntu-21
+ARG REGISTRY=quay.io/parkside-securities
+FROM $REGISTRY/docker-parkside-runtime:master-55
+
 ENV GOROOT /usr/local/go
 ENV GOPATH /root/go
 ENV GIT_SUBREPO_ROOT /root/repos/git-subrepo
 ENV PATH /root/repos/git-subrepo/lib:/usr/local/go/bin:/root/go/bin:${PATH}
 ENV MANPATH /root/repos/git-subrepo/man:$MANPATH
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
     apt-get install -yq git netcat rsync zsh libgd-dev fontconfig \
     libcairo2-dev libpango1.0-dev libgts-dev graphviz \
-    emacs25 silversearcher-ag \
+    emacs silversearcher-ag \
     kubectl less zlib1g-dev libffi-dev libssl-dev vim-nox tmate libxss1 \
-    nodejs build-essential plantuml rlwrap jq python3-venv && \
+    build-essential plantuml jq iproute2 && \
     apt-get clean
 RUN curl -sfL https://direnv.net/install.sh | bash
 RUN curl -s "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
@@ -49,16 +50,6 @@ RUN curl -OL https://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz &&
     chmod +x /usr/local/bin/redis-* && \
     rm -rf /tmp/redis-${REDIS_VERSION}
 
-ENV NVM_DIR /usr/local/nvm
-RUN mkdir -p $NVM_DIR && \
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-ENV NODE_VERSION v9.11.2
-RUN /bin/bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
-ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
-ENV PATH      $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
-RUN . $NVM_DIR/nvm.sh && \
-    nvm use default && \
-    npm install -g closh --unsafe-perm
 RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod +x lein && \
     mv lein /usr/local/bin && \
@@ -75,9 +66,6 @@ RUN mkdir -p /root/repos && \
     ln -s /root/repos/kubectx/kubectx /usr/local/bin/kubectx && \
     ln -s /root/repos/kubectx/kubens /usr/local/bin/kubens && \
     cd /root/repos/git-secrets && make install && cd - && \
-    curl https://pyenv.run | bash && \
-    /root/.pyenv/bin/pyenv install 3.7.2 && \
-    /root/.pyenv/bin/pyenv global 3.7.2 && \
     curl -OL https://github.com/eraserhd/rep/releases/download/v0.1.2/rep-0.1.2-linux-amd64.tar.gz && \
     tar zxvfp rep-0.1.2-linux-amd64.tar.gz && \
     cp rep-0.1.2-linux-amd64/rep /usr/local/bin/rep && chmod a+x /usr/local/bin/rep && \
@@ -88,13 +76,13 @@ RUN pip install mkdocs && \
     pip install plantuml-markdown && \
     pip install markdown-include && \
     pip install mkdocs-rtd-dropdown
-RUN python3 -m venv /usr/local/dbt-env && \
+RUN python -m venv /usr/local/dbt-env && \
     . /usr/local/dbt-env/bin/activate && \
-    python3 -m pip install -U pip && \
+    python -m pip install -U pip && \
     pip install wheel && \
     pip install dbt
-RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.1.0/drone_linux_amd64.tar.gz | tar zx && \
-    install -t /usr/local/bin drone
+RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.2.0/drone_linux_amd64.tar.gz | tar zx && \
+    mv drone /usr/local/bin/
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
