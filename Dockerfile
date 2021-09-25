@@ -1,5 +1,5 @@
-ARG REGISTRY=quay.io/parkside-securities
-FROM $REGISTRY/docker-parkside-runtime:master-55
+ARG REGISTRY=642622649254.dkr.ecr.us-west-2.amazonaws.com
+FROM $REGISTRY/docker-parkside-runtime:master
 
 ENV GOROOT /usr/local/go
 ENV GOPATH /root/go
@@ -83,6 +83,10 @@ RUN python -m venv /usr/local/dbt-env && \
     pip install dbt
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.2.0/drone_linux_amd64.tar.gz | tar zx && \
     mv drone /usr/local/bin/
+RUN curl -sLO https://raw.githubusercontent.com/babashka/babashka/master/install && \
+    chmod +x install && \
+    ./install && \
+    rm install
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
