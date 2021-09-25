@@ -1,0 +1,27 @@
+
+version: '1.0'
+steps:
+  main_clone:
+    title: Clone docker-clojure-dev
+    type: git-clone
+    repo: 'parkside-securities/docker-clojure-dev'
+    git: github
+    revision: '${{CF_REVISION}}'
+
+  build:
+    title: Building docker-clojure-dev
+    type: build
+    image_name: clojure-dev
+    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
+    registry: ecr
+
+  push:
+    title: Release docker-clojure-dev
+    registry: ecr
+    type: push
+    candidate: ${{build}}
+    tag: "${{CF_RELEASE_TAG}}"
+    when:
+      condition:
+        all:
+          whenVarExists: 'includes("${{CF_RELEASE_TAG}}", "{{CF_RELEASE_TAG}}") == false'
