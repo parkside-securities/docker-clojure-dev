@@ -83,9 +83,9 @@ RUN python -m venv /usr/local/dbt-env && \
     pip install dbt
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.2.0/drone_linux_amd64.tar.gz | tar zx && \
     mv drone /usr/local/bin/
-RUN curl -sLO https://raw.githubusercontent.com/babashka/babashka/master/install && \
-    chmod +x install && \
-    ./install
+RUN curl -sL https://raw.githubusercontent.com/babashka/babashka/master/install > bb-install && \
+    chmod +x bb-install && \
+    ./bb-install
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
