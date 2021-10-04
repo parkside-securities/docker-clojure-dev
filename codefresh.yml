@@ -1,0 +1,25 @@
+version: "1.0"
+stages:
+- clone
+- test
+- artifacts
+indicators:
+- shared_conditions: &conditions
+    noSkipCiInCommitMessage: includes(lower("${{CF_COMMIT_MESSAGE}}"), "skip ci") == false
+steps:
+  main_clone:
+    title: cloning_repository
+    type: git-clone
+    stage: clone
+    repo: parkside-securities/docker-clojure-dev
+    revision: ${{CF_REVISION}}
+  docker_build:
+    title: Build Docker Image
+    type: build
+    image_name: clojure-dev
+    disable_push: false
+    buildkit: true
+    build_arguments:
+      - REGISTRY=642622649254.dkr.ecr.us-west-2.amazonaws.com
+    registry: ecr
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
