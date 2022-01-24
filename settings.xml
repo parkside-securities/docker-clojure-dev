@@ -1,0 +1,38 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <localRepository />
+    <interactiveMode />
+    <offline />
+    <pluginGroups />
+
+    <servers>
+        <server>
+            <id>parkside</id>
+            <username>${env.ARTIFACTORY_USER}</username>
+            <password>${env.ARTIFACTORY_PASSWORD}</password>
+        </server>
+    </servers>
+    <mirrors>
+        <mirror>
+            <id>parkside</id>
+            <name>parkside</name>
+            <url>https://artifactory-codefresh.core-services.parkside.app/artifactory/parkside/</url>
+            <mirrorOf>*</mirrorOf>
+        </mirror>
+    </mirrors>
+    <proxies />
+    <profiles>
+        <profile>
+            <id>parkside</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>parkside</id>
+                    <url>https://artifactory-codefresh.core-services.parkside.app/artifactory/parkside/</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+    <activeProfiles />
+</settings>

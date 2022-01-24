@@ -88,5 +88,6 @@ COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
 COPY bashrc /root/.bashrc
 COPY zshrc /root/.zshrc
+COPY settings.xml /root/.m2/
 WORKDIR /parkside
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
