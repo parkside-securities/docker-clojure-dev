@@ -1,11 +1,13 @@
 ARG REGISTRY=quay.io/parkside-securities
-FROM $REGISTRY/docker-parkside-runtime:master-55
+FROM $REGISTRY/docker-parkside-runtime:master-68
 
 ENV GOROOT /usr/local/go
 ENV GOPATH /root/go
 ENV GIT_SUBREPO_ROOT /root/repos/git-subrepo
 ENV PATH /root/repos/git-subrepo/lib:/usr/local/go/bin:/root/go/bin:${PATH}
 ENV MANPATH /root/repos/git-subrepo/man:$MANPATH
+RUN mv /etc/apt/sources.list.d/nodesource.list /etc/apt/sources.list.d/nodesource.list.disabled
+
 RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update -yq && apt-get upgrade -yq && \
@@ -83,6 +85,9 @@ RUN python -m venv /usr/local/dbt-env && \
     pip install dbt
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.2.0/drone_linux_amd64.tar.gz | tar zx && \
     mv drone /usr/local/bin/
+RUN curl -sL https://raw.githubusercontent.com/babashka/babashka/master/install > bb-install && \
+    chmod +x bb-install && \
+    ./bb-install
 COPY entrypoint.sh /usr/local/bin
 COPY gitignore_global /root/gitignore_global
 COPY gitconfig /root/.gitconfig
