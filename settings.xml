@@ -16,7 +16,7 @@
             <id>parkside</id>
             <name>parkside</name>
             <url>https://artifactory-codefresh.core-services.parkside.app/artifactory/parkside/</url>
-            <mirrorOf>*</mirrorOf>
+            <mirrorOf>central,clojars</mirrorOf>
         </mirror>
     </mirrors>
     <proxies />
