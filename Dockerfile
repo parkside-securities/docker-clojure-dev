@@ -82,7 +82,7 @@ RUN python -m venv /usr/local/dbt-env && \
     . /usr/local/dbt-env/bin/activate && \
     python -m pip install -U pip && \
     pip install wheel && \
-    pip install dbt
+    pip install dbt==0.21.1
 RUN curl -L https://github.com/drone/drone-cli/releases/download/v1.2.0/drone_linux_amd64.tar.gz | tar zx && \
     mv drone /usr/local/bin/
 RUN curl -sL https://raw.githubusercontent.com/babashka/babashka/master/install > bb-install && \
